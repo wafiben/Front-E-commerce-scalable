@@ -8,10 +8,14 @@ import { GlobalState } from "../../../types/globalState";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { modifySingleUser } from "../../../store/users/actions";
 
-export const UpdateUser = ({ user ,handleClose}: { user: User,handleClose:any }) => {
-    const {  loading } = useSelector(
-        (state: GlobalState) => state.userReducer
-      );
+export const UpdateUser = ({
+  user,
+  handleClose,
+}: {
+  user: User;
+  handleClose: any;
+}) => {
+  const { loading } = useSelector((state: GlobalState) => state.userReducer);
 
   const dispatch = useDispatch();
 
@@ -28,18 +32,17 @@ export const UpdateUser = ({ user ,handleClose}: { user: User,handleClose:any })
     setItems(items);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     const userData = {
-      id:user.id,
+      id: user.id,
       firstName: firstName,
       lastName: lastName,
       gender: value,
       age: age,
       city: city,
     };
-    await dispatch(modifySingleUser(userData))
-    handleClose()
-
+    await dispatch(modifySingleUser(userData));
+    handleClose();
   };
 
   if (loading) {
@@ -49,7 +52,6 @@ export const UpdateUser = ({ user ,handleClose}: { user: User,handleClose:any })
       </div>
     );
   }
-
 
   return (
     <div>
@@ -101,7 +103,7 @@ export const UpdateUser = ({ user ,handleClose}: { user: User,handleClose:any })
         />
       </div>
       <div className="mt-1">
-        <Button label="Send" severity="info" onClick={handleSubmit}/>
+        <Button label="Send" severity="info" onClick={handleSubmit} />
       </div>
     </div>
   );
