@@ -9,9 +9,8 @@ import { AppDispatch } from "../../store/store";
 
 export const Profile = () => {
   const { id, user, loading } = useSelector(
-    (state: GlobalState) => state.userReducer
+    (state: GlobalState) => state.userReducer,
   );
-
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
