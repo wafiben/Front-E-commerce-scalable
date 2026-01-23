@@ -15,7 +15,7 @@ const App: React.FC = () => {
           <Route path="/users" element={<Home />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route
-            path="/create_freelancer_account"
+            path="/create_user"
             element={<CreateAccount />}
           />
           <Route path="/users/:id" element={<DetailsUser />} />

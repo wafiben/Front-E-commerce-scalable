@@ -41,7 +41,9 @@ export const UpdateUser = ({
       age: age,
       city: city,
     };
+
     await dispatch(modifySingleUser(userData));
+
     handleClose();
   };
 
