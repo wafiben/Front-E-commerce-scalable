@@ -14,10 +14,13 @@ export const logIn: any = createAsyncThunk(
       if (response.status !== 200) {
         dispatch(singnInLoading(false));
         return rejectWithValue(response.message); // ← Use rejectWithValue for errors
+      } else {
+        console.log("sssssssssssssssssssssssssss");
+        console.log(response);
+        localStorage.setItem("token", response.token);
+        dispatch(singnInLoading(false));
+        return response;
       }
-      localStorage.setItem("token", response.token);
-      dispatch(singnInLoading(false));
-      return response;
     } catch (error: any) {
       throw new Error("Failed to Get Single User.");
     } finally {

@@ -7,4 +7,5 @@ export type UserState = {
   letter: string;
   age: number;
   user: User | null;
+  currentUser: User | null;
 };

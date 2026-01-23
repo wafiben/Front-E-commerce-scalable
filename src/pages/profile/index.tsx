@@ -3,21 +3,20 @@ import { Card } from "primereact/card";
 import { useEffect } from "react";
 import { GlobalState } from "../../types/globalState";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneUser } from "../../store/users/actions";
+import { getMe } from "../../store/users/actions";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { AppDispatch } from "../../store/store";
 
 export const Profile = () => {
-  const { id, user, loading } = useSelector(
+  const { currentUser, loading } = useSelector(
     (state: GlobalState) => state.userReducer,
   );
 
   const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    if (id) {
-      dispatch(getOneUser(id));
-    }
-  }, [dispatch, id]);
+    dispatch(getMe());
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -31,19 +30,21 @@ export const Profile = () => {
     <>
       <div className="flex justify-content-center">
         <div className="card w-5 mt-5 text-center">
-          <Card title={user ? `${user.name} ${user.name}` : ""}>
+          <Card
+            title={currentUser ? `${currentUser.name} ${currentUser.name}` : ""}
+          >
             <Avatar
-              label={user ? user.name[0] : ""}
+              label={currentUser ? currentUser.name[0] : ""}
               size="large"
               style={{ backgroundColor: "#2196F3", color: "#ffffff" }}
               shape="circle"
             />
             <p className="m-0">
-              name: <strong>{user && user.name}</strong>
+              name: <strong>{currentUser && currentUser.name}</strong>
             </p>
 
-            {user?.services && user.services.length > 0 ? (
-              user.services.map((service, index) => (
+            {currentUser?.services && currentUser.services.length > 0 ? (
+              currentUser.services.map((service, index) => (
                 <div className="m-0" key={index}>
                   <p>
                     Service Name: <strong>{service.name}</strong>

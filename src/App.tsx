@@ -4,7 +4,7 @@ import Home from "./pages/freelancers";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CreateAccount } from "./pages/add-user";
 import { SignIn } from "./pages/sign-in";
-import { Profile } from "./pages/freelance-profile";
+import { Profile } from "./pages/profile";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <Layout>
         <Routes>
           <Route path="/users" element={<Home />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/me" element={<Profile />} />
           <Route
             path="/create_user"
             element={<CreateAccount />}

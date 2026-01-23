@@ -18,3 +18,7 @@ export const LOG_IN: string = "LOG_IN";
 export const LOG_IN_LOADING: string = "LOG_IN_LOADING";
 
 export const LOG_OUT: string = "LOG_IN";
+
+export const GET_ME: string = "GET_ME";
+
+export const GET_ME_LOADING: string = "GET_ME_LOADING";

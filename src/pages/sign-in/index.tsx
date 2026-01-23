@@ -49,9 +49,9 @@ export const SignIn = () => {
         life: 3000,
       });
 
-      setTimeout(() => {
+     /*  setTimeout(() => {
         navigate("/create_user");
-      }, 3500);
+      }, 3500); */
     }
     // Check for INVALID_CREDENTIALS (separate condition)
     else if (result?.payload?.includes(AuthError.INVALID_CREDENTIALS)) {
@@ -75,6 +75,14 @@ export const SignIn = () => {
         detail: "Welcome",
         life: 3000,
       });
+
+      console.log("result login ", result.response);
+
+      localStorage.setItem("token", result.token);
+
+      setTimeout(() => {
+        navigate("/profile/me");
+      }, 3500);
     }
   };
 
