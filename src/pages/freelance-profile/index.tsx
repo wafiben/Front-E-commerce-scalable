@@ -41,28 +41,13 @@ export const Profile = () => {
             <p className="m-0">
               name: <strong>{user && user.name}</strong>
             </p>
+            <p className="m-0">
+              name: <strong>{user && user.username}</strong>
+            </p>
 
-            {user?.services && user.services.length > 0 ? (
-              user.services.map((service, index) => (
-                <div className="m-0" key={index}>
-                  <p>
-                    Service Name: <strong>{service.name}</strong>
-                  </p>
-                  <p>
-                    Labor Price: <strong>${service.laborPrice}</strong>
-                  </p>
-                  <p>
-                    Estimated Material Cost:{" "}
-                    <strong>${service.estimatedMaterialCost}</strong>
-                  </p>
-                  <p>
-                    Notes: <strong>{service.notes}</strong>
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p>No services available</p>
-            )}
+            <p className="m-0">
+              name: <strong>{user && user.email}</strong>
+            </p>
           </Card>
         </div>
       </div>

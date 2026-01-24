@@ -2,6 +2,7 @@ import { BASE_DEV_URL } from "../../config/url";
 import { User } from "../../types/user";
 import { UserDto } from "../../types/userDto";
 import { handleRequest } from "../http";
+import axios from "axios";
 
 export type responseSignIn = { token: string };
 
@@ -24,5 +25,14 @@ export const singnIn = async (data: UserDto) =>
   await handleRequest<responseSignIn>(
     `${BASE_DEV_URL}auth/login`,
     "POST",
-    data
+    data,
   );
+
+export const getMyProfile = async (): Promise<User> => {
+  const response = await axios.get(`${BASE_DEV_URL}auth/profile`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  return response.data;
+};

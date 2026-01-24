@@ -6,6 +6,7 @@ import {
   deleteSingleUser,
   createFreelancer,
   modifyUser,
+  getMyProfile,
 } from "../../api/user/user";
 import {
   GET_ALL_USERS,
@@ -15,7 +16,9 @@ import {
   GET_SINGLE_USER_LOADING,
   Delete_SINGLE_USER_LOADING,
   CREATE_SINGLE_USER_LOADING,
-  MODIFY_SINGLE_USER_LOADING
+  MODIFY_SINGLE_USER_LOADING,
+  GET_ME,
+  GET_ME_LOADING,
 } from "../constants";
 import { User } from "../../types/user";
 
@@ -33,7 +36,7 @@ export const getAllUsers = createAsyncThunk(
     } finally {
       dispatch(getAllUsersLoading(false));
     }
-  }
+  },
 );
 
 export const searchUsersWithFirstNameOrLastName = createAction(
@@ -42,7 +45,7 @@ export const searchUsersWithFirstNameOrLastName = createAction(
     return {
       payload: data,
     };
-  }
+  },
 );
 
 export const searchUsersAge = createAction(
@@ -51,7 +54,7 @@ export const searchUsersAge = createAction(
     return {
       payload: data,
     };
-  }
+  },
 );
 
 export const getSingleUserLoading: any = createAction(GET_SINGLE_USER_LOADING);
@@ -67,7 +70,7 @@ export const getOneUser = createAsyncThunk(
     } finally {
       dispatch(getSingleUserLoading(false));
     }
-  }
+  },
 );
 
 export const deleteUserLoading: any = createAction(Delete_SINGLE_USER_LOADING);
@@ -82,7 +85,7 @@ export const deleteUser = createAsyncThunk(
     } finally {
       dispatch(deleteUserLoading(false));
     }
-  }
+  },
 );
 
 export const createUserLoading: any = createAction(CREATE_SINGLE_USER_LOADING);
@@ -98,7 +101,7 @@ export const createUserFreelancer: any = createAsyncThunk(
     } finally {
       dispatch(createUserLoading(false));
     }
-  }
+  },
 );
 
 export const modifyUserLoading: any = createAction(MODIFY_SINGLE_USER_LOADING);
@@ -121,5 +124,20 @@ export const modifySingleUser: any = createAsyncThunk(
     } finally {
       dispatch(modifyUserLoading(false));
     }
-  }
+  },
 );
+
+export const getMeLoading: any = createAction(GET_ME_LOADING);
+
+export const getMe = createAsyncThunk(GET_ME, async (_, { dispatch }) => {
+  try {
+    dispatch(getMeLoading(true));
+  
+    const res = await getMyProfile();
+    return res;
+  } catch (error) {
+    throw new Error("Failed to fetch user profile");
+  } finally {
+    dispatch(getMeLoading(false));
+  }
+});

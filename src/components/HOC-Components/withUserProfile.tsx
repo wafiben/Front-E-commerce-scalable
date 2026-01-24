@@ -1,37 +1,40 @@
+// hoc/withUserProfile.tsx
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../types/globalState";
 import { useEffect } from "react";
-import { getOneUser } from "../../store/users/actions";
-import { Profile } from "../../pages/freelance-profile";
-import { MyProfile } from "../../pages/my-profile";
+import { getOneUser, getMe } from "../../store/users/actions";
 import { AppDispatch } from "../../store/store";
 
-// hoc/withUserProfile.tsx
+
 export const withUserProfile = (
   Component: React.FC<any>,
   isMyProfile: boolean = false,
-  token?: string,
 ) => {
   return (props: any) => {
     const { id } = useParams();
     const dispatch = useDispatch<AppDispatch>();
-    const { user, loading } = useSelector(
+
+    const { user, loading, currentUser, currentUserLoading } = useSelector(
       (state: GlobalState) => state.userReducer,
     );
+    console.log("HOC user profile - id:", id, " isMyProfile:", isMyProfile);
 
     useEffect(() => {
       if (isMyProfile) {
-        // Get current user
+        if (!currentUser && !currentUserLoading) {
+          dispatch(getMe());
+        }
       } else if (id) {
         dispatch(getOneUser(id));
       }
-    }, [dispatch, id]);
+    }, [dispatch, id, currentUser, currentUserLoading]);
 
-    return <Component {...props} user={user} loading={loading} />;
+    const profileUser = isMyProfile ? currentUser : user;
+    const profileLoading = isMyProfile ? currentUserLoading : loading;
+
+    return (
+      <Component {...props} user={profileUser} loading={profileLoading} />
+    );
   };
 };
-
-// Usage:
-export const DetailsUser = withUserProfile(Profile, false);
-export const MyProfileComponent = withUserProfile(MyProfile, true);

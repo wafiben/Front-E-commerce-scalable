@@ -6,6 +6,8 @@ import {
   deleteUserLoading,
   getAllUsers,
   getAllUsersLoading,
+  getMe,
+  getMeLoading,
   getOneUser,
   getSingleUserLoading,
   modifySingleUser,
@@ -15,12 +17,15 @@ import { UserState } from "../../types/userState";
 
 const initialState: UserState = {
   users: [],
-  id:null,
+  id: null,
   loading: false,
   letter: "",
   age: 100,
   user: null,
+  currentUser: null,
+  currentUserLoading: false,
 };
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -45,7 +50,7 @@ export const userSlice = createSlice({
           ...state,
           loading: true,
         };
-      }
+      },
     );
 
     builder.addCase(deleteUser.fulfilled, (state: any, action) => {
@@ -61,7 +66,7 @@ export const userSlice = createSlice({
           ...state,
           loading: true,
         };
-      }
+      },
     );
 
     builder.addCase(createUserFreelancer.fulfilled, (state: any, action) => {
@@ -78,7 +83,7 @@ export const userSlice = createSlice({
           ...state,
           loading: true,
         };
-      }
+      },
     );
 
     builder.addCase(modifySingleUser.fulfilled, (state: any, action) => {
@@ -94,7 +99,7 @@ export const userSlice = createSlice({
           ...state,
           loading: true,
         };
-      }
+      },
     );
 
     builder.addCase(
@@ -105,7 +110,24 @@ export const userSlice = createSlice({
           ...state,
           loading: true,
         };
-      }
+      },
     );
+
+    builder.addCase(getMe.fulfilled, (state, action) => {
+      state.currentUser = action.payload;
+      state.currentUserLoading = false;
+    });
+
+    builder.addCase(getMe.rejected, (state, action) => {
+      state.currentUser = null;
+      state.currentUserLoading = false;
+    });
+
+    builder.addCase(getMeLoading, (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        currentUserLoading: action.payload,
+      };
+    });
   },
 });
