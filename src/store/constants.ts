@@ -1,4 +1,5 @@
 export const GET_ALL_USERS: string = "GET_ALL_USERS";
+
 export const GET_ALL_USERS_LOADING: string = "GET_ALL_USERS_LOADING";
 
 export const SEARCH_USERS_WITH_LETTER: string = "SEARCH_USERS_WITH_LETTER";
@@ -18,3 +19,7 @@ export const LOG_IN: string = "LOG_IN";
 export const LOG_IN_LOADING: string = "LOG_IN_LOADING";
 
 export const LOG_OUT: string = "LOG_IN";
+
+export const GET_ME: string = "GET_ME";
+
+export const GET_ME_LOADING: string = "GET_ME_LOADING";
