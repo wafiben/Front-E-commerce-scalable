@@ -39,42 +39,31 @@ export const SignIn = () => {
 
     const result = await dispatch(logIn(userData));
 
-    // Check for USER_NOT_FOUND
-    if (result?.payload?.includes(AuthError.USER_NOT_FOUND)) {
-      toast.current?.show({
-        severity: "warn",
-        summary: "Account Not Found",
-        detail:
-          "No account exists with this email. Redirecting to registration...",
-        life: 3000,
-      });
+    if (logIn.rejected.match(result)) {
+      const errorMessage = result.payload as string;
 
-      setTimeout(() => {
-        navigate("/create_user");
-      }, 3500);
-    }
-    // Check for INVALID_CREDENTIALS (separate condition)
-    else if (result?.payload?.includes(AuthError.INVALID_CREDENTIALS)) {
-      toast.current?.show({
-        severity: "error",
-        summary: "Invalid Credentials",
-        detail: "The email or password you entered is incorrect.",
-        life: 3000,
-      });
-    } else if (logIn.fulfilled.match(result)) {
-      toast.current?.show({
-        severity: "success",
-        summary: "Login Successful",
-        detail: "Welcome back!",
-        life: 2000,
-      });
+      if (errorMessage?.includes(AuthError.USER_NOT_FOUND)) {
+        toast.current?.show({
+          severity: "warn",
+          summary: "Account Not Found",
+          detail:
+            "No account exists with this email. Redirecting to registration...",
+          life: 3000,
+        });
+
+        setTimeout(() => {
+          navigate("/create_user");
+        }, 3500);
+      } else if (errorMessage?.includes(AuthError.INVALID_CREDENTIALS)) {
+        toast.current?.show({
+          severity: "error",
+          summary: "Invalid Credentials",
+          detail: "The email or password you entered is incorrect.",
+          life: 3000,
+        });
+      }
     } else {
-      toast.current?.show({
-        severity: "success",
-        summary: "Sucess",
-        detail: "Welcome",
-        life: 3000,
-      });
+      navigate("/my_profile");
     }
   };
 

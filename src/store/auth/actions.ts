@@ -11,17 +11,18 @@ export const logIn: any = createAsyncThunk(
     try {
       dispatch(singnInLoading(true));
       const response = await singnIn(userInfo);
+
       if (response.status !== 200) {
         dispatch(singnInLoading(false));
-        return rejectWithValue(response.message); // ← Use rejectWithValue for errors
+        return rejectWithValue(response.message);
       }
+
       localStorage.setItem("token", response.token);
       dispatch(singnInLoading(false));
       return response;
     } catch (error: any) {
-      throw new Error("Failed to Get Single User.");
-    } finally {
       dispatch(singnInLoading(false));
+      return rejectWithValue(error.message || "Failed to Get Single User."); // ← Changed this
     }
   },
 );
