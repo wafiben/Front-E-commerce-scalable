@@ -6,6 +6,7 @@ import { CreateAccount } from "./pages/add-user";
 import { SignIn } from "./pages/sign-in";
 import { Profile } from "./pages/freelance-profile";
 import "./App.css";
+import { MyProfile } from "./pages/my-profile";
 
 const App: React.FC = () => {
   return (
@@ -14,10 +15,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/users" element={<Home />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route
-            path="/create_user"
-            element={<CreateAccount />}
-          />
+          <Route path="/my_profile" element={<MyProfile />} />
+          <Route path="/create_user" element={<CreateAccount />} />
           <Route path="/users/:id" element={<DetailsUser />} />
           <Route path="/" element={<SignIn />} />
         </Routes>

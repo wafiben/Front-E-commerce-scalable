@@ -1,18 +1,18 @@
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserFreelancer } from "../../store/users/actions";
 import { useNavigate } from "react-router-dom";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { GlobalState } from "../../types/globalState";
+import { Toast } from "primereact/toast";
 
 export const CreateAccount = () => {
   const { loading } = useSelector((state: GlobalState) => state.userReducer);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const toast = useRef<Toast>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +20,15 @@ export const CreateAccount = () => {
   const [laborPrice, setLaborPrice] = useState("");
   const [estimatedMaterialCost, setEstimatedMaterialCost] = useState("");
   const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    toast.current?.show({
+      severity: "info",
+      summary: "info",
+      detail: "create your account please",
+      life: 3000,
+    });
+  }, []);
 
   const handleSubmit = async () => {
     const services = [
@@ -56,6 +65,7 @@ export const CreateAccount = () => {
 
   return (
     <>
+      <Toast ref={toast} />
       <div className="flex justify-content-center">
         <div>
           {/* Name */}

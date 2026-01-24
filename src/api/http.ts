@@ -1,7 +1,7 @@
 export const handleRequest = async <T>(
   url: string,
   method: string,
-  data?: any
+  data?: any,
 ) => {
   const option: RequestInit = {
     method: method,
@@ -11,8 +11,10 @@ export const handleRequest = async <T>(
     body: data ? JSON.stringify(data) : null,
   };
 
-  
   const response = await fetch(url, option);
   const responseData: T = await response.json();
-  return responseData;
+  return {
+    status: response.status,
+    ...responseData,
+  };
 };
