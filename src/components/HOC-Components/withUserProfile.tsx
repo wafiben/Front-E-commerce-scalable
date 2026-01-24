@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { getOneUser, getMe } from "../../store/users/actions";
 import { AppDispatch } from "../../store/store";
 
-
 export const withUserProfile = (
   Component: React.FC<any>,
   isMyProfile: boolean = false,
@@ -18,7 +17,6 @@ export const withUserProfile = (
     const { user, loading, currentUser, currentUserLoading } = useSelector(
       (state: GlobalState) => state.userReducer,
     );
-    console.log("HOC user profile - id:", id, " isMyProfile:", isMyProfile);
 
     useEffect(() => {
       if (isMyProfile) {
@@ -33,8 +31,6 @@ export const withUserProfile = (
     const profileUser = isMyProfile ? currentUser : user;
     const profileLoading = isMyProfile ? currentUserLoading : loading;
 
-    return (
-      <Component {...props} user={profileUser} loading={profileLoading} />
-    );
+    return <Component {...props} user={profileUser} loading={profileLoading} />;
   };
 };

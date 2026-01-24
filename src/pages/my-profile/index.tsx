@@ -1,4 +1,3 @@
-// pages/my-profile/index.tsx
 import { Toast } from "primereact/toast";
 import { useRef, useEffect } from "react";
 import { User } from "../../types/user";
