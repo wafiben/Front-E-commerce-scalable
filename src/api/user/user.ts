@@ -19,7 +19,7 @@ export const getSingleUser = async (id: string) =>
   await handleRequest<any>(`${BASE_DEV_URL}user-freelance/single/${id}`, "GET");
 
 export const getUsers = async () =>
-  await handleRequest<any>(`${BASE_DEV_URL}user-freelance`, "GET");
+  await handleRequest<any>(`${BASE_DEV_URL}users`, "GET");
 
 export const singnIn = async (data: UserDto) =>
   await handleRequest<responseSignIn>(

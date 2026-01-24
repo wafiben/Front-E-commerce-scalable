@@ -18,7 +18,6 @@ export const withUserProfile = (
     const { user, loading, currentUser, currentUserLoading } = useSelector(
       (state: GlobalState) => state.userReducer,
     );
-    console.log("HOC user profile - id:", id, " isMyProfile:", isMyProfile);
 
     useEffect(() => {
       if (isMyProfile) {
