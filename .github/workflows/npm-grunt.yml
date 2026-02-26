@@ -66,14 +66,3 @@ jobs:
             sleep 3
           done
           echo "Container failed to start" && exit 1
-
-      - name: Install Railway CLI
-        if: github.ref == 'refs/heads/main'
-        run: npm install -g @railway/cli
-
-      - name: Deploy to Railway
-        if: github.ref == 'refs/heads/main'
-        run: railway redeploy --service frontend
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}

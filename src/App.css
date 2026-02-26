@@ -1,5 +1,6 @@
 /* Whole page gray */
 .app-container {
+  background-color: red;
   background-color: #f0f0f0; /* light gray */
   min-height: 100vh; /* full screen height */
 }

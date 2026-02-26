@@ -76,7 +76,7 @@ export const SignIn = () => {
   }
 
   return (
-    <div className="flex justify-content-center">
+    <div className="flex justify-content-center" style={{ backgroundColor: "red" }}>
       <Toast ref={toast} />
       <form onSubmit={onSubmit} className="p-fluid" style={{ width: "300px" }}>
         <h2 className="text-center">Sign In</h2>
